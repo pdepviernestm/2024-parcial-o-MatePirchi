@@ -1,0 +1,37 @@
+import examenO.*
+
+describe "tests de punto 6" {
+  test "grupo vive evento insultado"{
+    var personas = [new Persona(edad = 14), new Persona(edad = 18), new Persona(edad = 15)]
+    var aux = 10
+    personas.forEach({persona => 
+      persona.nuevaEmocion(new Furia()) 
+      persona.nuevaEmocion(new Alegria(intensidad = 10 + aux)) 
+      persona.nuevaEmocion(new Tristeza(intensidad = 5 + aux))
+      persona.nuevaEmocion(new Temor(intensidad = 100 - aux))
+      persona.nuevaEmocion(new Desagrado(intensidad = 50 - aux))
+      persona.nuevaEmocion(new Ansiedad(intensidad = 20 + aux))
+      aux += 10
+    })
+    insultado.sucederA(personas)
+
+    assert.that(personas.all({persona => persona.emociones().all({emocion => emocion.eventosVividos() == 1})}))
+  }
+
+  test "grupo vive evento pelearseConFamilia"{
+    var personas = [new Persona(edad = 14), new Persona(edad = 18), new Persona(edad = 15)]
+    var aux = 10
+    personas.forEach({persona => 
+      persona.nuevaEmocion(new Furia()) 
+      persona.nuevaEmocion(new Alegria(intensidad = aux)) 
+      persona.nuevaEmocion(new Tristeza(intensidad = 5 + aux))
+      persona.nuevaEmocion(new Temor(intensidad = 20 - aux))
+      persona.nuevaEmocion(new Desagrado(intensidad = 15 - aux))
+      persona.nuevaEmocion(new Ansiedad(intensidad = 9 + aux))
+      aux += 10
+    })
+    pelearseConFamilia.sucederA(personas)
+
+    assert.that(personas.all({persona => persona.emociones().all({emocion => emocion.eventosVividos() == 1})}))
+  }
+}
